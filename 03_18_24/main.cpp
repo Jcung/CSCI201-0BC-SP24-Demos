@@ -2,6 +2,7 @@
 #include <string>
 #include <limits>
 #include "drink.h"
+#include "clock.h"
 
 std::string printDrink(const drink &);
 
@@ -14,6 +15,10 @@ int main()
     myDrink.dairy = "Almond Milk";
     myDrink.flavor = "Brown Sugar";
     std::cout << printDrink(myDrink) << std::endl;
+
+    clockType myClock;
+    myClock.setTime(5, 5, 33);
+    std::cout << myClock.to_string() << std::endl;
 
     return 0;
 }
