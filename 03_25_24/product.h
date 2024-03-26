@@ -5,11 +5,12 @@
 #include <sstream>
 #include <iomanip>
 #include <algorithm>
+#include "clock.h"
 
 class product
 {
 public:
-    product(double price, std::string description, std::string prodNum);
+    product(std::string prodNum, double price = 0.01, std::string description = "", int hr = 0, int min = 0, int sec = 0);
     std::string getProductNum() const;
     std::string getDescription() const;
     double getPrice() const;
@@ -24,6 +25,7 @@ protected:
     std::string description;
     std::string prodNum;
     bool purchased;
+    clockType myClock;
 };
 
 enum baseType
@@ -86,5 +88,51 @@ private:
     std::string flavor;
     static int numDrinks;
 };
+enum flavorType
+{
+    VANILLAICECREAM,
+    CHOCOLATEICECREAM,
+    STRAWBERRY,
+    MINT_CHOCOLATE_CHIP,
+    COOKIE_DOUGH,
+    COOKIES_AND_CREAM,
+    BUTTER_PECAN,
+    ROCKY_ROAD,
+    CHOCOLATE_CHIP,
+    MOOSE_TRACKS,
 
+    CHOCOLATE_FUDGE_BROWNIE,
+    PISTACHIO,
+    RUM_RAISIN,
+    NEAPOLITAN,
+    FRENCH_VANILLA,
+    PEANUT_BUTTER_CUP,
+    BLACK_RASPBERRY,
+    BIRTHDAY_CAKE,
+    CARAMEL_SWIRL,
+    MAPLE_WALNUT,
+    BANANA_SPLIT,
+    TUTTI_FRUTTI,
+    ORANGE_SHERBET,
+    COCONUTICECREAM
+
+};
+
+class iceCream : public product
+{
+public:
+    iceCream(flavorType = VANILLAICECREAM, int = 1);
+    // lecture activity fill-in getters and setters
+    flavorType getFlavor() const;
+    int getScoopAmount() const;
+    void setFlavor(flavorType);
+    void setScoopAmount(int);
+    std::string tostring();
+    static double scoopPricing(int);
+
+private:
+    flavorType flavor;
+    int scoopAmount;
+    static int prodNum;
+};
 #endif

@@ -1,6 +1,6 @@
 #include "product.h"
 
-product::product(double price, std::string description, std::string prodNum)
+product::product(std::string prodNum, double price, std::string description, int hr, int min, int sec) : myClock(hr, min, sec)
 {
     setPrice(price);
     setDescription(description);
@@ -91,7 +91,7 @@ std::string drink::getTemperature() const
     return tempStr[temperature];
 }
 
-drink::drink(baseType b, tempType t, sizeType s, std::string d, std::string f) : product(0.01, "Drink", "drink" + std::to_string(++drink::numDrinks))
+drink::drink(baseType b, tempType t, sizeType s, std::string d, std::string f) : product("drink" + std::to_string(++drink::numDrinks))
 {
     setBase(b);
     setTemperature(t);
@@ -99,6 +99,7 @@ drink::drink(baseType b, tempType t, sizeType s, std::string d, std::string f) :
     setDairy(d);
     setFlavor(f);
     // product::setPrice(getPrice());
+    description = getBaseStr() + " " + getTemperature() + " " + getSize();
     price = getPrice();
 }
 
@@ -271,7 +272,7 @@ std::string drink::tostring() const
     return out.str();
 }
 
-drink::drink(baseType b, tempType t, sizeType s, std::string d, std::string f, std::string description, std::string prodNum) : product(0.0, description, prodNum)
+drink::drink(baseType b, tempType t, sizeType s, std::string d, std::string f, std::string description, std::string prodNum) : product(prodNum, 0.01, description)
 {
     drink::numDrinks++;
     setBase(b);
@@ -280,4 +281,35 @@ drink::drink(baseType b, tempType t, sizeType s, std::string d, std::string f, s
     setDairy(d);
     setFlavor(f);
     product::setPrice(getPrice());
+}
+
+double iceCream::scoopPricing(int scoops)
+{
+    switch (scoops)
+    {
+    case 1:
+        return 3.0;
+    case 2:
+        return 4.0;
+    case 3:
+        return 5.0;
+    default:
+        return scoops * 1.65;
+    }
+    return 0.0;
+}
+int iceCream::prodNum = 1;
+iceCream::iceCream(flavorType flavor, int scoopAmount) : product("Ice Cream", scoopPricing(scoopAmount), "I" + std::to_string(prodNum++))
+{
+    // setFlavor(flavor);
+    // setScoopAmount(scoopAmount);
+    purchase();
+}
+std::string iceCream::tostring()
+{
+    std::ostringstream out;
+    out << scoopAmount << " scoops of "
+        << "Flavor string"
+        << " - " << product::tostring();
+    return out.str();
 }
