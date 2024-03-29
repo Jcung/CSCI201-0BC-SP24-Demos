@@ -1,151 +1,63 @@
+/* Program name: Character.cpp
+* Author: John Cung
+* Date last updated: 3/28/2024
+* Purpose: to create rgb characters and le them do their special attacks
+*/
 #include <iostream>
-#include <limits>
-#include "product.h"
+#include <string>
+#include <cstdlib>
+#include <ctime>
+#include "character.h"
 
-// lecture activity fill-in getters and setters for ice cream
-// add an ice cream variable to the main with a call to it's tostring.
-void resetStream();
+//main
+int main() {
 
-int main()
-{
-    /* std::string prodNum = "1234a";
-    std::string descript = "My product";
-    product p(prodNum, 3.99, descript);
-    product r(prodNum + "b");
-    product s(prodNum + "s", 8.99, "This product", 12, 20, 3);
-    std::cout << p.tostring() << std::endl;
-    drink d(COFFEE, HOT, LARGE, "Skim Milk", "Brown Sugar");
-    std::cout << d.tostring() << std::endl;
-    drink myDrink(TEA, ICE, SMALL, "none", "none", "Small Iced Tea", "tea1234");
-    std::cout << myDrink.tostring() << std::endl;
-    std::cout << myDrink.getDescription() << std::endl; */
-    int drinkSize;
-    int drinkBase;
-    int drinkTemp;
-    std::string dairy;
-    std::string flavor;
-    std::cout << "Please choose the drink size:" << std::endl;
-    for (int i = 0; i < ENUM_NUM; i++)
-    {
-        std::cout << i + 1 << ": " << sizeStr[i] << std::endl;
-    }
-    std::cin >> drinkSize;
-    while (!std::cin || drinkSize < 1 || drinkSize > 3)
-    {
-        if (!std::cin)
-        {
-            resetStream();
-        }
-        std::cout << "You must choose a number from the list." << std::endl;
-        std::cout << "Please choose the drink size:" << std::endl;
-        for (int i = 0; i < ENUM_NUM; i++)
-        {
-            std::cout << i + 1 << ": " << sizeStr[i] << std::endl;
-        }
-        std::cin >> drinkSize;
-    }
+    std::string fighterName, rogueName, magicianName, clericName;
 
-    std::cout << "Please choose the drink base:" << std::endl;
-    for (int i = 0; i < ENUM_NUM; i++)
-    {
-        std::cout << i + 1 << ": " << baseStr[i] << std::endl;
-    }
-    std::cin >> drinkBase;
-    while (!std::cin || drinkBase < 1 || drinkBase > 3)
-    {
-        if (!std::cin)
-        {
-            resetStream();
-        }
-        std::cout << "You must choose a number from the list." << std::endl;
-        std::cout << "Please choose the drink base:" << std::endl;
-        for (int i = 0; i < ENUM_NUM; i++)
-        {
-            std::cout << i + 1 << ": " << baseStr[i] << std::endl;
-        }
-        std::cin >> drinkBase;
-    }
-    std::cout << "Please choose the drink temperature:" << std::endl;
-    for (int i = 0; i < ENUM_NUM; i++)
-    {
-        std::cout << i + 1 << ": " << tempStr[i] << std::endl;
-    }
-    std::cin >> drinkTemp;
-    while (!std::cin || drinkTemp < 1 || drinkTemp > 3)
-    {
-        if (!std::cin)
-        {
-            resetStream();
-        }
-        std::cout << "You must choose a number from the list." << std::endl;
-        std::cout << "Please choose the drink temperature:" << std::endl;
-        for (int i = 0; i < ENUM_NUM; i++)
-        {
-            std::cout << i + 1 << ": " << tempStr[i] << std::endl;
-        }
-        std::cin >> drinkTemp;
-    }
-    std::cout << "Please enter a flavor for your drink: ";
-    std::cin >> std::ws;
-    std::getline(std::cin, flavor);
-    std::cout << "What kind of dairy would you like? ";
-    std::cin >> std::ws;
-    std::getline(std::cin, dairy);
-    drink customerDrink(bases[drinkBase - 1], temps[drinkTemp - 1], sizes[drinkSize - 1], dairy, flavor);
-    std::cout << customerDrink.tostring() << std::endl;
-    /*     Please choose the drink size:
-1: Small
-2: Medium
-3: Large
-2
-Please choose the drink base:
-1: Coffee
-2: Tea
-3: Cream
-1
-Please choose the drink temperature:
-1: Hot
-2: Iced
-3: Blended
-2
-Please enter a flavor for your drink: Raspberry
-What kind of dairy would you like? Skim Milk
-The customer drink:
-Size: Medium
-Base: Coffee
-Temperature: Iced
-Flavor: Raspberry
-Dairy: Skim Milk
-Price: $7.50
-Would you like to change the drink? Please choose from the menu.
-1. Change Size
-2. Change Base
-3. Change Temperature
-4. Change Dairy
-5. Change Flavor
-6. No Changes
-4
-What kind of dairy would you like? Oat Milk
-Would you like to change the drink? Please choose from the menu.
-1. Change Size
-2. Change Base
-3. Change Temperature
-4. Change Dairy
-5. Change Flavor
-6. No Changes
-6
-Size: Medium
-Base: Coffee
-Temperature: Iced
-Flavor: Raspberry
-Dairy: Oat Milk
-Price: $8.75 */
+    std::cout << "What is your fighter's name: ";
+    std::getline(std::cin, fighterName);
+    fighter fighter(fighterName);
+
+    std::cout << "\nWhat is your rogue's name: ";
+    std::getline(std::cin, rogueName);
+    Rogue rogue(rogueName);
+
+    std::cout << "\nWhat is your magician's name: ";
+    std::getline(std::cin, magicianName);
+    magician magician(magicianName);
+
+    std::cout << "\nWhat is your cleric's name: ";
+    std::getline(std::cin, clericName);
+    cleric cleric(clericName);
+
+    std::cout << "\nTesting\n";
+
+    std::cout << "Fighter Starting Stats\n";
+    std::cout << fighter.toString() << std::endl;
+    std::cout << ""<<std::endl;
+   
+
+    std::cout << "\nRogue Starting Stats\n";
+    std::cout << rogue.toString() << std::endl;
+    std::cout << ""<<std::endl;
+
+    //calling the special attacks classes
+    fighter.specialAbility(rogue);
+    rogue.specialAbility(fighter);
+
+    std::cout << "\nMagician Starting Stats\n";
+    std::cout << magician.toString() << std::endl;
+    std::cout << ""<<std::endl;
+    
+
+    std::cout << "\nCleric Starting Stats\n";
+    std::cout << cleric.toString() << std::endl;
+    std::cout << ""<<std::endl;
+
+  //calling the special attacks classes
+    magician.specialAbility(rogue);
+    cleric.specialAbility(rogue);
 
     return 0;
 }
 
-void resetStream()
-{
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-}
